@@ -1,8 +1,10 @@
 package br.com.libdolf.taskmanager.models;
 
+import br.com.libdolf.taskmanager.controllers.dtos.LoginRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 import java.util.HashSet;
@@ -21,7 +23,7 @@ public class User {
     private String name;
 
     @NotBlank @Column(unique = true)
-    private String email;
+    private String username;
 
     @NotBlank
     private String password;
@@ -36,4 +38,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+
+    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(loginRequest.password(), this.password);
+    }
 }

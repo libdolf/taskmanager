@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 
-
 @Data
 @Entity
 @Table(name = "tb_roles")
