@@ -5,13 +5,13 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Entity
 @Data
+@Entity
 @Table(name = "tb_groups")
 public class Group {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long groupId;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Task> tasks;
 }

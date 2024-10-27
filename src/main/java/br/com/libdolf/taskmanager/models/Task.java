@@ -1,17 +1,18 @@
 package br.com.libdolf.taskmanager.models;
 
+import br.com.libdolf.taskmanager.models.utils.Priority;
+import br.com.libdolf.taskmanager.models.utils.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.Objects;
-
-@Entity
 @Data
+@Entity
 @Table(name = "tb_tasks")
 public class Task {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "task_id")
+    private Long taskId;
 
     @NotBlank
     private String title;
@@ -19,21 +20,12 @@ public class Task {
 
     private Status status;
     private Priority priority;
+
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User assignee;
+
     @ManyToOne
+    @JoinColumn(name = "group_id")
     private Group group;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equals(id, task.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }
