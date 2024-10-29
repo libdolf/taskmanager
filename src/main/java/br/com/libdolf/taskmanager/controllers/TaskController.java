@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class TaskController {
     private TaskService taskService;
 
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
     @GetMapping("/all")
     public ResponseEntity<Page<TaskResponse>> getAllTasks(Pageable pageable) {
         return ResponseEntity.ok(taskService.findAllTasks(pageable));

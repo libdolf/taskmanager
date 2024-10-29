@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public abstract class TaskMapper {
     @Mapping(target = "userId", source = "user.userId")
+    @Mapping(target = "id", source = "taskId")
     public abstract TaskResponse toResponse(Task task);
     public abstract Task toEntity(TaskRequest taskRequest);
 }
