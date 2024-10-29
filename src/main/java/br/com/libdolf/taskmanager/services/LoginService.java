@@ -18,18 +18,18 @@ import java.util.stream.Collectors;
 
 @Service
 public class LoginService {
-    private final UserRepository userRepository;
+    private final UserService service;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
 
-    public LoginService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, JwtEncoder jwtEncoder) {
-        this.userRepository = userRepository;
+    public LoginService(UserService service, BCryptPasswordEncoder passwordEncoder, JwtEncoder jwtEncoder) {
+        this.service = service;
         this.passwordEncoder = passwordEncoder;
         this.jwtEncoder = jwtEncoder;
     }
 
     public LoginResponse login(LoginRequest request) {
-        Optional<User> user = userRepository.findByUsername(request.username());
+        Optional<User> user = service.findByUsername(request.username());
 
         if (user.isEmpty() || !user.get().isLoginCorrect(request, passwordEncoder)) {
             throw new BadCredentialsException("user or password is invalid!");

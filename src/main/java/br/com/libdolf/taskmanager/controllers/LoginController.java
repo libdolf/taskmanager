@@ -22,6 +22,4 @@ public class LoginController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request){
         return ResponseEntity.ok(service.login(request));
     }
-
-
 }

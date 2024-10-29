@@ -3,6 +3,7 @@ package br.com.libdolf.taskmanager.models;
 import br.com.libdolf.taskmanager.controllers.dtos.LoginRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -37,6 +38,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @NotEmpty
     private Set<Role> roles;
 
     public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {

@@ -12,6 +12,6 @@ public class Group {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long groupId;
     private String name;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Task> tasks;
 }
